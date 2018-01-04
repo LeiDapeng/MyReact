@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js'></script>
+    <script src="./React/React.js"></script>
+    <script src="./React/ReactClass.js"></script>
+    <script src="./React/ReactComponentFactory.js"></script>
+    <script src="./React/ReactElement.js"></script>
+    
+    <script src="./React/ReactDOMTextComponent.js"></script>
+    <script src="./React/ReactDOMComponent.js"></script>
+    <script src="./React/ReactCompositeComponent.js"></script>
+
+    
+</head>
+
+<body>
+    <div id='container'></div>
+</body>
+<script>
+    var HelloMessage = React.createClass({
+        getInitialState: function () {
+            return {
+                index:0,
+                name:this.props.name,
+                text:['hello','gun'],
+            };
+        },
+        componentWillMount: function () {
+            console.log('我就要开始渲染了。。。')
+        },
+        componentDidMount: function () {
+            console.log('我已经渲染好了。。。')
+        },
+        render: function () {
+            // let text=this.getText();
+            return React.createElement("div", {onclick:this.changeType.bind(this),style:"background:blue"},this.state.text[this.state.index], "Hello", this.state.name);
+        },
+        changeType:function(){
+            let text=this.getText(); 
+            console.log(text)
+            this.setState({type:text})
+        },
+        getText:function(){
+            this.state.index=this.state.index==0?1:0;
+            return this.state.text[this.state.index];
+        }
+    });
+
+    // React.render(React.createElement(HelloMessage, {
+    //     name: "John"
+    // }), document.getElementById("container"));
+
+    
+    var hello=React.createElement(HelloMessage,{name:'john'})
+    // var div=React.createElement('2',null,'2',hello);
+    // var one=React.createElement('3',null,'3',div);
+    // hello='hello';
+
+
+
+    React.render(hello, document.getElementById("container"));
+
+ 
+
+</script>
+
+</html>
